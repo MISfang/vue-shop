@@ -6,3 +6,15 @@ body,
     margin: 0;
     padding: 0;
 }
+
+.el-breadcrumb {
+    margin-bottom: 20px;
+}
+
+.el-card {
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.el-table {
+    margin: 20px 0;
+}

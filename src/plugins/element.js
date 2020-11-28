@@ -1,16 +1,30 @@
 import Vue from 'vue'
 import {
-  Button
-} from 'element-ui'
-import {
+  Button,
   Form,
-  FormItem
-} from 'element-ui'
-import {
-  Input
-} from 'element-ui'
-import {
-  Message
+  FormItem,
+  Input,
+  Message,
+  Container,
+  Header,
+  Aside,
+  Main,
+  Menu,
+  Submenu,
+  MenuItemGroup,
+  MenuItem,
+  Breadcrumb,
+  BreadcrumbItem,
+  Card,
+  Row,
+  Col,
+  Table,
+  TableColumn,
+  Switch,
+  Tooltip,
+  Pagination,
+  Dialog,
+  MessageBox
 } from 'element-ui'
 
 // 全局注册成为可用的组件
@@ -18,6 +32,28 @@ Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
+Vue.use(Container)
+Vue.use(Header)
+Vue.use(Aside)
+Vue.use(Main)
+Vue.use(MenuItem)
+Vue.use(MenuItemGroup)
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
+Vue.use(Card)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Switch)
+Vue.use(Tooltip)
+Vue.use(Pagination)
+Vue.use(Dialog)
 
-// 提示消息需要全局挂载
+
+
+// 需要全局挂载的都写在下面
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm
