@@ -95,7 +95,6 @@ export default {
       const { data: res } = await this.$http.get("menus");
       if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
       this.menulist = res.data;
-      console.log(res.data);
     },
     // 菜单页面的折叠与展开功能
     toggleChange() {
@@ -137,7 +136,7 @@ export default {
 .el-aside {
   z-index: 2;
   background-color: #323744;
-  box-shadow: 0 20px 20px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 4px 20px 20px 10px rgba(0, 0, 0, 0.4);
 }
 .el-main {
   background-color: #eaedf2;

@@ -3,8 +3,8 @@
     <!-- 面包屑导航 -->
     <el-breadcrumb separator-class="el-icon-caret-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item><a href="/">用户管理</a></el-breadcrumb-item>
-      <el-breadcrumb-item><a href="/">用户列表</a></el-breadcrumb-item>
+      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
       <!-- 搜索与添加区域 -->
@@ -100,6 +100,7 @@
                 type="warning"
                 icon="el-icon-setting"
                 circle
+                @click="setRole(scope.row)"
               ></el-button>
             </el-tooltip>
           </template>
@@ -189,6 +190,34 @@
         <el-button type="primary" @click="editUser()">确 定</el-button>
       </span>
     </el-dialog>
+
+    <!-- 点击设置权限的弹框 -->
+    <el-dialog
+  title="分配角色"
+  :visible.sync="setDialogVisible"
+  width="50%"
+  :before-close="handleClose" @close='resetRoleDialog'>
+  <!-- 主体内容 -->
+  <div>
+    <p>当前用户名称：{{userInfo.username}}</p>
+    <p>当前用户角色：{{userInfo.role_name}}</p>
+    <el-select v-model="selectRoleId" clearable placeholder="请选择" filterable>
+    <el-option
+      v-for="item in rolesList"
+      :key="item.id"
+      :label="item.roleName"
+      :value="item.id">
+    </el-option>
+  </el-select>
+  </div>
+  <!-- 内容区结束 -->
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="setDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="saveRoleInfo">确 定</el-button>
+  </span>
+</el-dialog>
+
+<!-- 结束 -->
   </div>
 </template>
 
@@ -225,6 +254,17 @@ export default {
 
       // 控制修改对话框的显示与隐藏
       editDialogVisible: false,
+
+      // 设置权限的对话框的显示与隐藏
+      setDialogVisible:false,
+
+      userInfo:{},
+
+      // 定义所有角色数据
+      rolesList:{},
+      // 已经选择的角色id值
+      selectRoleId:'',
+
       // 添加用户数据
       addForm: {
         username: "(测试)李彬彬",
@@ -363,26 +403,53 @@ export default {
       });
     },
 
+    // 点击保存用户修改的角色
+    async saveRoleInfo(){
+      if(!this.selectRoleId){
+        return this.$message.info('请选择角色后在点击确定！')
+      }
+      const {data:res}=await this.$http.put(`users/${this.userInfo.id}/role`,{rid:this.selectRoleId})
+      if (res.meta.status !== 200)
+          return this.$message.error("更新用户角色失败了！");
+      this.$message.success("更新用户角色成功了！");
+      this.getUserList();
+    },
+    // 设置角色的弹出窗口，并向服务器提交
+    async setRole(userInfo){
+      this.userInfo=userInfo
+
+      const {data:res}=await this.$http.get('roles')
+      if (res.meta.status !== 200) {
+        return this.$message.error("获取所有角色列表失败！");
+      }
+      this.rolesList=res.data
+      this.setDialogVisible=true
+      
+    },
+
     // 根据id删除对应的用户信息
     async removeUserById(id) {
       // 先弹框询问用户是否删除
-      const confirmResult = await this.$confirm("删除改用户的数据，是否确定！", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .catch(err =>err);
-        if(confirmResult!=='confirm'){
-          return this.$message.info('已经取消删除！')
+      const confirmResult = await this.$confirm(
+        "删除改用户的数据，是否确定！",
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
         }
-        if(confirmResult=='confirm'){
-          const {data:res} = await this.$http.delete('users/'+id)
-          if(res.meta.status!==200){
-            return this.$message.error('删除用户失败！')
-          }
-          this.$message.success('删除用户成功！')
-          this.getUserList();
+      ).catch(err => err);
+      if (confirmResult !== "confirm") {
+        return this.$message.info("已经取消删除！");
+      }
+      if (confirmResult == "confirm") {
+        const { data: res } = await this.$http.delete("users/" + id);
+        if (res.meta.status !== 200) {
+          return this.$message.error("删除用户失败！");
         }
+        this.$message.success("删除用户成功！");
+        this.getUserList();
+      }
     },
 
     // 监听状态数据，并处理到后台
@@ -405,6 +472,10 @@ export default {
       }
       this.userList = res.data.users;
       this.total = res.data.total;
+    },
+    resetRoleDialog(){
+      this.selectRoleId='',
+      this.userInfo={}
     }
   }
 };
@@ -429,5 +500,9 @@ export default {
 .el-form {
   margin-left: -20px;
   margin-right: 40px;
+}
+.el-table td,
+.el-table th {
+  text-align: center !important;
 }
 </style>
