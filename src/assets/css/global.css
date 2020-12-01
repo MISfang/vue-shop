@@ -19,3 +19,9 @@ body,
 .el-table {
     margin: 20px 0;
 }
+
+/* 在你的全局global.css里面添加 */
+
+.el-cascader-menu {
+    height: 300px;
+}

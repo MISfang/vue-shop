@@ -109,7 +109,7 @@
       <!-- 表格结束 -->
 
       <!-- 下面是底部导航 -->
-      <div class="block">
+      <div>
         <div class="daoHang">
           <el-pagination
             @size-change="handleSizeChange"
@@ -193,31 +193,39 @@
 
     <!-- 点击设置权限的弹框 -->
     <el-dialog
-  title="分配角色"
-  :visible.sync="setDialogVisible"
-  width="50%"
-  :before-close="handleClose" @close='resetRoleDialog'>
-  <!-- 主体内容 -->
-  <div>
-    <p>当前用户名称：{{userInfo.username}}</p>
-    <p>当前用户角色：{{userInfo.role_name}}</p>
-    <el-select v-model="selectRoleId" clearable placeholder="请选择" filterable>
-    <el-option
-      v-for="item in rolesList"
-      :key="item.id"
-      :label="item.roleName"
-      :value="item.id">
-    </el-option>
-  </el-select>
-  </div>
-  <!-- 内容区结束 -->
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="setDialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="saveRoleInfo">确 定</el-button>
-  </span>
-</el-dialog>
+      title="分配角色"
+      :visible.sync="setDialogVisible"
+      width="50%"
+      :before-close="handleClose"
+      @close="resetRoleDialog"
+    >
+      <!-- 主体内容 -->
+      <div>
+        <p>当前用户名称：{{ userInfo.username }}</p>
+        <p>当前用户角色：{{ userInfo.role_name }}</p>
+        <el-select
+          v-model="selectRoleId"
+          clearable
+          placeholder="请选择"
+          filterable
+        >
+          <el-option
+            v-for="item in rolesList"
+            :key="item.id"
+            :label="item.roleName"
+            :value="item.id"
+          >
+          </el-option>
+        </el-select>
+      </div>
+      <!-- 内容区结束 -->
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="saveRoleInfo">确 定</el-button>
+      </span>
+    </el-dialog>
 
-<!-- 结束 -->
+    <!-- 结束 -->
   </div>
 </template>
 
@@ -256,14 +264,14 @@ export default {
       editDialogVisible: false,
 
       // 设置权限的对话框的显示与隐藏
-      setDialogVisible:false,
+      setDialogVisible: false,
 
-      userInfo:{},
+      userInfo: {},
 
       // 定义所有角色数据
-      rolesList:{},
+      rolesList: {},
       // 已经选择的角色id值
-      selectRoleId:'',
+      selectRoleId: "",
 
       // 添加用户数据
       addForm: {
@@ -404,27 +412,31 @@ export default {
     },
 
     // 点击保存用户修改的角色
-    async saveRoleInfo(){
-      if(!this.selectRoleId){
-        return this.$message.info('请选择角色后在点击确定！')
+    async saveRoleInfo() {
+      if (!this.selectRoleId) {
+        return this.$message.info("请选择角色后在点击确定！");
       }
-      const {data:res}=await this.$http.put(`users/${this.userInfo.id}/role`,{rid:this.selectRoleId})
+      const { data: res } = await this.$http.put(
+        `users/${this.userInfo.id}/role`,
+        {
+          rid: this.selectRoleId
+        }
+      );
       if (res.meta.status !== 200)
-          return this.$message.error("更新用户角色失败了！");
+        return this.$message.error("更新用户角色失败了！");
       this.$message.success("更新用户角色成功了！");
       this.getUserList();
     },
     // 设置角色的弹出窗口，并向服务器提交
-    async setRole(userInfo){
-      this.userInfo=userInfo
+    async setRole(userInfo) {
+      this.userInfo = userInfo;
 
-      const {data:res}=await this.$http.get('roles')
+      const { data: res } = await this.$http.get("roles");
       if (res.meta.status !== 200) {
         return this.$message.error("获取所有角色列表失败！");
       }
-      this.rolesList=res.data
-      this.setDialogVisible=true
-      
+      this.rolesList = res.data;
+      this.setDialogVisible = true;
     },
 
     // 根据id删除对应的用户信息
@@ -473,9 +485,8 @@ export default {
       this.userList = res.data.users;
       this.total = res.data.total;
     },
-    resetRoleDialog(){
-      this.selectRoleId='',
-      this.userInfo={}
+    resetRoleDialog() {
+      (this.selectRoleId = ""), (this.userInfo = {});
     }
   }
 };
@@ -500,9 +511,5 @@ export default {
 .el-form {
   margin-left: -20px;
   margin-right: 40px;
-}
-.el-table td,
-.el-table th {
-  text-align: center !important;
 }
 </style>
