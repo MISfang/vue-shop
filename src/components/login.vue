@@ -4,7 +4,7 @@
 
     <div class="login_box">
       <div class="avatar_box">
-        <img src="../assets/logo.png" alt="" />
+        <img src="../assets/图层 5.png" alt="" />
       </div>
 
       <!-- 表单 -->

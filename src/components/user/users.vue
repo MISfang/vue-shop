@@ -376,7 +376,7 @@ export default {
       this.editForm = res.data;
     },
 
-    // 提交表单时候预校验,并向服务器提交数据
+    // （添加用户）提交表单时候预校验,并向服务器提交数据
     addUser() {
       this.$refs.addFormRef.validate(async valid => {
         if (!valid) return this.$message.error("表单有误！");
@@ -390,7 +390,7 @@ export default {
       });
     },
 
-    // 修改数据室，弹出表单，并向服务器提交修改数据
+    // 修改数据时，弹出表单，并向服务器提交修改数据
     editUser() {
       this.$refs.editFormRef.validate(async valid => {
         if (!valid) return;
@@ -426,6 +426,7 @@ export default {
         return this.$message.error("更新用户角色失败了！");
       this.$message.success("更新用户角色成功了！");
       this.getUserList();
+      this.setDialogVisible = false;
     },
     // 设置角色的弹出窗口，并向服务器提交
     async setRole(userInfo) {
@@ -443,7 +444,7 @@ export default {
     async removeUserById(id) {
       // 先弹框询问用户是否删除
       const confirmResult = await this.$confirm(
-        "删除改用户的数据，是否确定！",
+        "删除该用户的数据，是否确定！",
         "提示",
         {
           confirmButtonText: "确定",
