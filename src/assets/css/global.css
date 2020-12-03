@@ -25,3 +25,19 @@ body,
 .el-cascader-menu {
     height: 300px;
 }
+
+.el-alert__title {
+    font-size: 18px;
+}
+
+.el-step__title {
+    font-size: 14px;
+}
+
+.ql-editor {
+    min-height: 300px;
+}
+
+.ql-container {
+    margin-bottom: 20px !important;
+}

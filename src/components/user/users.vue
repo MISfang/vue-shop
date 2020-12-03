@@ -119,6 +119,7 @@
             :page-size="queryInfo.pagesize"
             layout="total, sizes, prev, pager, next, jumper"
             :total="total"
+            background
           >
           </el-pagination>
         </div>
