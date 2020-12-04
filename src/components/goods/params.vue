@@ -9,6 +9,14 @@
     <!-- 下面的卡片视图 -->
     <el-card>
       <el-alert
+        title="请先选择商品，然后再进行后续操作！"
+        type="info"
+        effect="dark"
+        show-icon
+        :closable="false"
+      >
+      </el-alert>
+      <el-alert
         title="注意：只允许为第三级商品设置相关参数"
         type="info"
         effect="dark"
@@ -534,7 +542,7 @@ export default {
 
 <style lang="less" scoped>
 .el-alert {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .el-tabs {
   margin-top: 20px;
