@@ -11,4 +11,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#nprogress .bar {
+  background: linear-gradient(to right, #2980b9, #2c3e50) !important;
+}
+</style>
