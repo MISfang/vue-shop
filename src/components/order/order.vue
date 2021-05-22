@@ -26,9 +26,7 @@
           </el-input>
         </el-col>
         <!-- 右边的按钮 -->
-        <el-col :span="6">
-          <el-button type="primary" round>添加商品</el-button>
-        </el-col>
+        <el-col :span="6"> </el-col>
       </el-row>
       <!-- 上方功能区结束 -->
 
@@ -65,20 +63,22 @@
             {{ scope.row.create_time | dateFormat }}
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="120">
           <template>
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              circle
-              @click="showBox"
-            ></el-button>
-            <el-button
-              type="success"
-              icon="el-icon-location"
-              circle
-              @click="showProgress"
-            ></el-button>
+            <div>
+              <el-button
+                type="primary"
+                icon="el-icon-edit"
+                circle
+                @click="showBox"
+              ></el-button>
+              <el-button
+                type="success"
+                icon="el-icon-location"
+                circle
+                @click="showProgress"
+              ></el-button>
+            </div>
           </template>
         </el-table-column>
       </el-table>
@@ -170,7 +170,7 @@ export default {
       queryInfo: {
         query: "",
         pagenum: 1,
-        pagesize: 5
+        pagesize: 5,
       },
       //   总的订单条数
       total: 0,
@@ -185,16 +185,16 @@ export default {
       // 修改地址的数据
       addressForm: {
         address01: [],
-        address02: ""
+        address02: "",
       },
       //   修改数据表单的验证规则
       addressFormRules: {
         address01: [
-          { required: true, message: "请选择省市区/县", trigger: "blur" }
+          { required: true, message: "请选择省市区/县", trigger: "blur" },
         ],
         address02: [
-          { required: true, message: "请填写详细地址", trigger: "blur" }
-        ]
+          { required: true, message: "请填写详细地址", trigger: "blur" },
+        ],
       },
 
       //   导进来的市地县数据包
@@ -210,65 +210,65 @@ export default {
           time: "2018-05-10 09:39:00",
           ftime: "2018-05-10 09:39:00",
           context: "已签收,感谢使用顺丰,期待再次为您服务",
-          location: ""
+          location: "",
         },
         {
           time: "2018-05-10 08:23:00",
           ftime: "2018-05-10 08:23:00",
           context:
             "[北京市]北京海淀育新小区营业点派件员 顺丰速运 95338正在为您派件",
-          location: ""
+          location: "",
         },
         {
           time: "2018-05-10 07:32:00",
           ftime: "2018-05-10 07:32:00",
           context: "快件到达 [北京海淀育新小区营业点]",
-          location: ""
+          location: "",
         },
         {
           time: "2018-05-10 02:03:00",
           ftime: "2018-05-10 02:03:00",
           context:
             "快件在[北京顺义集散中心]已装车,准备发往 [北京海淀育新小区营业点]",
-          location: ""
+          location: "",
         },
         {
           time: "2018-05-09 23:05:00",
           ftime: "2018-05-09 23:05:00",
           context: "快件到达 [北京顺义集散中心]",
-          location: ""
+          location: "",
         },
         {
           time: "2018-05-09 21:21:00",
           ftime: "2018-05-09 21:21:00",
           context: "快件在[北京宝胜营业点]已装车,准备发往 [北京顺义集散中心]",
-          location: ""
+          location: "",
         },
         {
           time: "2018-05-09 13:07:00",
           ftime: "2018-05-09 13:07:00",
           context: "顺丰速运 已收取快件",
-          location: ""
+          location: "",
         },
         {
           time: "2018-05-09 12:25:03",
           ftime: "2018-05-09 12:25:03",
           context: "卖家发货",
-          location: ""
+          location: "",
         },
         {
           time: "2018-05-09 12:22:24",
           ftime: "2018-05-09 12:22:24",
           context: "您的订单将由HLA（北京海淀区清河中街店）门店安排发货。",
-          location: ""
+          location: "",
         },
         {
           time: "2018-05-08 21:36:04",
           ftime: "2018-05-08 21:36:04",
           context: "商品已经下单",
-          location: ""
-        }
-      ]
+          location: "",
+        },
+      ],
     };
   },
   created() {
@@ -279,7 +279,7 @@ export default {
     //   获取订单列表的方法
     async getOrderList() {
       const { data: res } = await this.$http.get("orders", {
-        params: this.queryInfo
+        params: this.queryInfo,
       });
       if (res.meta.status !== 200) {
         return this.$message.error("获取订单数据源失败了！");
@@ -322,8 +322,8 @@ export default {
       //   this.$message.success("获取物流信息成功！");
       //   this.progressInfo = res.data;
       //   console.log(this.progressInfo);
-    }
-  }
+    },
+  },
 };
 </script>
 
