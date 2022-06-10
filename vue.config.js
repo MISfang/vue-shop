@@ -27,5 +27,15 @@ module.exports = {
         .clear()
         .add("./src/main-dev.js");
     });
+  },
+  pluginOptions: {
+    electronBuilder: {
+      builderOptions: {
+        appId: "Fapp",
+        electronDownload: {
+          mirror: "https://npm.taobao.org/mirrors/electron/"
+        }
+      }
+    }
   }
 };

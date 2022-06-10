@@ -3,9 +3,9 @@
     <!-- 这个是头部区域 -->
     <el-header>
       <div>
-        <img src="..\assets\heima.png" alt="" />
-        <span>vue实战后台管理系统</span>
+        <span>订单生成管理系统</span>
       </div>
+
       <el-button type="info" round @click="logout">退出登录</el-button>
     </el-header>
     <!-- 页面主体区域 -->

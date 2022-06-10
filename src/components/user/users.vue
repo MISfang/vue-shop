@@ -40,15 +40,15 @@
       >
         <el-table-column type="index" width="50"> </el-table-column>
         <!-- 这是一列 -->
-        <el-table-column prop="username" label="用户名" width="200">
+        <el-table-column prop="username" label="患者名称" width="200">
         </el-table-column>
         <!-- 一列结束 -->
 
-        <el-table-column prop="email" label="邮箱" width="220">
+        <el-table-column prop="email" label="患者邮箱" width="220">
         </el-table-column>
-        <el-table-column prop="mobile" label="电话" width="220">
+        <el-table-column prop="mobile" label="联系方式" width="220">
         </el-table-column>
-        <el-table-column prop="role_name" label="角色" width="200">
+        <el-table-column prop="role_name" label="患者类别" width="200">
         </el-table-column>
         <el-table-column prop="mg_state" label="状态" width="160">
           <template slot-scope="scope">

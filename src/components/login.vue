@@ -1,47 +1,49 @@
 <template>
   <div class="login_container">
-    <!-- 这个是登录组件 -->
+    <div class="login_container">
+      <!-- 这个是登录组件 -->
 
-    <div class="login_box">
-      <div class="avatar_box">
-        <img src="../assets/图层 5.png" alt="" />
+      <div class="login_box">
+        <div class="avatar_box">
+          <img src="../assets/图层 5.png" alt="" />
+        </div>
+
+        <!-- 表单 -->
+        <el-form
+          label-width="0px"
+          class="form_box"
+          :model="loginForm"
+          :rules="rules"
+          ref="loginformRef"
+        >
+          <!-- 用户名区域 -->
+          <el-form-item label="" prop="username">
+            <el-input
+              prefix-icon="el-icon-user-solid"
+              v-model="loginForm.username"
+              class="input_name"
+              placeholder="请输入用户名:"
+            ></el-input>
+          </el-form-item>
+          <!-- 密码区域区域 -->
+          <el-form-item label="" prop="password">
+            <el-input
+              prefix-icon="el-icon-question"
+              v-model="loginForm.password"
+              class="input_word"
+              type="password"
+              placeholder="请输入密码:"
+            ></el-input>
+          </el-form-item>
+          <!-- 下方按钮区域 -->
+          <el-form-item class="btns">
+            <el-button type="primary" class="button_left" @click="login"
+              >登录</el-button
+            >
+            <el-button type="success" @click="loginformRef">重置表单</el-button>
+          </el-form-item>
+        </el-form>
       </div>
-
-      <!-- 表单 -->
-      <el-form
-        label-width="0px"
-        class="form_box"
-        :model="loginForm"
-        :rules="rules"
-        ref="loginformRef"
-      >
-        <!-- 用户名区域 -->
-        <el-form-item label="" prop="username">
-          <el-input
-            prefix-icon="el-icon-user-solid"
-            v-model="loginForm.username"
-            class="input_name"
-            placeholder="请输入用户名:"
-          ></el-input>
-        </el-form-item>
-        <!-- 密码区域区域 -->
-        <el-form-item label="" prop="password">
-          <el-input
-            prefix-icon="el-icon-question"
-            v-model="loginForm.password"
-            class="input_word"
-            type="password"
-            placeholder="请输入密码:"
-          ></el-input>
-        </el-form-item>
-        <!-- 下方按钮区域 -->
-        <el-form-item class="btns">
-          <el-button type="primary" class="button_left" @click="login"
-            >登录</el-button
-          >
-          <el-button type="success" @click="loginformRef">重置表单</el-button>
-        </el-form-item>
-      </el-form>
     </div>
   </div>
 </template>
@@ -154,5 +156,10 @@ export default {
 }
 .input_word :hover {
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+.h1 {
+  margin-left: 670px;
+  letter-spacing: 5px;
+  color: black;
 }
 </style>

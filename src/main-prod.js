@@ -17,6 +17,7 @@ Vue.prototype.$http = axios;
 
 // 配置请求的根路径
 axios.defaults.baseURL = "http://www.ysqorz.top:8888/api/private/v1/";
+// axios.defaults.baseURL = "http://127.0.0.1:8888/";
 
 // 设置axios拦截器
 // 在request拦截器中展示进度条

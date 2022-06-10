@@ -1,22 +1,23 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
+import Router from "vue-router";
 import Login from "../components/login.vue";
-import Home from '../components/home.vue';
-import Welcome from '../components/welcome.vue';
-import User from '../components/user/users.vue';
-import Rights from '../components/power/rights.vue';
-import Roles from '../components/power/roles.vue';
-import Cate from '../components/goods/cate.vue';
-import Goods from '../components/goods/goods.vue';
-import Params from '../components/goods/params.vue';
-import GoodsAdd from '../components/goods/add.vue'
-import Order from '../components/order/order.vue'
-import Report from '../components/report/report.vue'
+import Home from "../components/home.vue";
+import Welcome from "../components/welcome.vue";
+import User from "../components/user/users.vue";
+import Rights from "../components/power/rights.vue";
+import Roles from "../components/power/roles.vue";
+import Cate from "../components/goods/cate.vue";
+import Goods from "../components/goods/goods.vue";
+import Params from "../components/goods/params.vue";
+import GoodsAdd from "../components/goods/add.vue";
+import Order from "../components/order/order.vue";
+import Report from "../components/report/report.vue";
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
-const router = new VueRouter({
-  routes: [{
+const router = new Router({
+  routes: [
+    {
       path: "/",
       redirect: "/login"
     },
@@ -25,47 +26,48 @@ const router = new VueRouter({
       component: Login
     },
     {
-      path: '/home',
-      redirect: '/welcome',
+      path: "/home",
+      redirect: "/welcome",
       component: Home,
-      children: [{
+      children: [
+        {
           path: "/welcome",
           component: Welcome
         },
         {
-          path: '/users',
+          path: "/users",
           component: User
         },
         {
-          path: '/rights',
+          path: "/rights",
           component: Rights
         },
         {
-          path: '/roles',
+          path: "/roles",
           component: Roles
         },
         {
-          path: '/categories',
+          path: "/categories",
           component: Cate
         },
         {
-          path: '/goods',
-          component: Goods,
+          path: "/goods",
+          component: Goods
         },
         {
-          path: '/params',
+          path: "/params",
           component: Params
         },
         {
-          path: '/goods/add',
+          path: "/goods/add",
           component: GoodsAdd
         },
         {
-          path: '/orders',
+          path: "/orders",
           component: Order
         },
         {
-          path: '/reports',
+          path: "/reports",
           component: Report
         }
       ]
@@ -80,13 +82,13 @@ router.beforeEach((to, from, next) => {
   // next可以直接放行这个页面，也可以设置参数跳转其他页面
 
   // 如果是登录页面就直接放行
-  if (to.path === '/login') return next();
+  if (to.path === "/login") return next();
 
   // 不是登录页面,执行下面代码
-  const tokenStr = window.sessionStorage.getItem('token');
+  const tokenStr = window.sessionStorage.getItem("token");
   // 如果没有token值，则强制跳转到登录页面，让用户登录
-  if (!tokenStr) return next('/login')
-  next()
-})
+  if (!tokenStr) return next("/login");
+  next();
+});
 
 export default router;
